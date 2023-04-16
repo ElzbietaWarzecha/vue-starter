@@ -8,11 +8,11 @@
     <!-- <button @click="alertMyEmail()">Wyświetl mój e-mail w alercie</button> -->
     <!-- <button @click="logIn()">Wchodzę</button> -->
     <div v-if="email">
-      Witaj {{ email }} !!!
-      <a @click="logOut()">Wyloguj</a>
-      </div>
+      <UserPanel @login="(username) => logOut()"></UserPanel></div>
     <div v-else>
-      <LoginForm @login="(username) => logIn(username)"></LoginForm>
+      <LoginForm @login="(username) => logIn(username)" button-label="Wejdź"></LoginForm>
+      <!-- <LoginForm @login="(username) => logIn(username)" button-label="Wleć"></LoginForm>
+      <LoginForm @login="(username) => logIn(username)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></LoginForm> -->
 <!-- tego niżej nie potrzebuję jak dodam komponent dziecko -->
       <!-- <div>Zaloguj się e-mailem
       <input type="email" v-model="email"> -->
@@ -30,9 +30,10 @@
 <script>
 import "milligram";
 import LoginForm from "./LoginForm";
+import UserPanel from "./UserPanel.vue";
 
 export default {
-  components: {LoginForm}, //muszę tu dodać komponent
+  components: { LoginForm, UserPanel }, //muszę tu dodać komponent
   data() {
   return {
     // email: 'ewarzecha@agh.edu.pl',
