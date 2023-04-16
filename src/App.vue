@@ -7,15 +7,17 @@
     <!-- <input type="email" v-model="email"> -->
     <!-- <button @click="alertMyEmail()">Wyświetl mój e-mail w alercie</button> -->
     <!-- <button @click="logIn()">Wchodzę</button> -->
-    <div v-if="loggedIn">
+    <div v-if="email">
       Witaj {{ email }} !!!
       <a @click="logOut()">Wyloguj</a>
       </div>
     <div v-else>
-      <div>Zaloguj się e-mailem
-      <input type="email" v-model="email">
-      <button @click="logIn()">Wchodzę</button>
-    </div>
+      <LoginForm @login="(username) => logIn(username)"></LoginForm>
+<!-- tego niżej nie potrzebuję jak dodam komponent dziecko -->
+      <!-- <div>Zaloguj się e-mailem
+      <input type="email" v-model="email"> -->
+      <!-- <button @click="logIn()">Wchodzę</button> -->
+    <!-- </div> -->
     </div>
   </div>
   
@@ -27,24 +29,29 @@
 
 <script>
 import "milligram";
+import LoginForm from "./LoginForm";
+
 export default {
+  components: {LoginForm}, //muszę tu dodać komponent
   data() {
   return {
     // email: 'ewarzecha@agh.edu.pl',
     email: '',
     password: '',
-    loggedIn: false
+    //loggedIn: false
   };
 },
 methods: {
   alertMyEmail() {
     alert(this.email);
   },
-  logIn() {
-    this.loggedIn=true;
+  logIn(username) {
+    this.email=username;
+    //this.loggedIn=true;
   },
   logOut() {
-    this.loggedIn=false;
+    //this.loggedIn=false;
+    this.email='';
   }
 }
 }
